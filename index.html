@@ -1,1 +1,468 @@
-To be posted by WMT'24
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Metadata and links omitted for brevity -->
+  <style>
+    @font-face {
+      font-family: 'xkcd-script';
+      src: url('fonts/xkcd-script.woff') format('woff'),
+           url('fonts/xkcd-script.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }  
+
+    .title-centered {
+      text-align: center;
+    }
+    .image-centered {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%; /* Increased width for larger image */
+    }
+    .image-bigger {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 750%; /* Increased width for larger image */
+    }
+    .image-half-width {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%; /* Set width to 50% */
+    }
+    .image-smaller {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 30%; /* Set width to 50% */
+    }
+    .content-centered {
+        text-align: justify; /* Aligns text like the abstract */
+        font-size: 1rem; /* Matches the abstract font size */
+    }
+    
+    .section {
+        background-color: #f5f5f5; /* Consistent background like the abstract */
+    }
+    .subtitle {
+        margin-top: 20px; /* Adds space between image and text */
+        font-size: 1rem; /* Matches the abstract font size */
+    }
+    .light-section {
+        background-color: #f5f5f5; /* Light gray background */
+    }
+    .dark-section {
+        background-color: #ffffff; /* White background */
+    }
+    .architecture {
+        padding-top: 25pt; /* space above h2 in arch sections */
+    }
+    .vistra {
+        font-variant: small-caps; /* benchmark name in small-caps */
+    }
+
+    .slider-container {
+        position: relative;
+        height: 100px; /* Ensure this matches the instruction height */
+        margin-top: -70px; /* Apply negative margin to close the gap */
+        margin-bottom: 50px; /* Keep the original margin here */
+        padding: 0 10px;
+    }
+  
+    .slider {
+        width: 100%;
+        margin: 0;
+    }
+
+    .slider-labels {
+        position: absolute;
+        bottom: -20px; /* Position below the slider */
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: space-between;
+        font-family: 'xkcd-script', sans-serif;
+        font-size: 0.8cm;
+    }
+    
+    .slider-instruction {
+        position: relative;
+        top: -100px;
+        left: -230px; /* Position the arrow correctly */
+        display: flex;
+        align-items: center;
+        margin-top: 0px;
+        margin-bottom: -0px; /* Further reduce space */
+        height: 60px; /* Explicit height, match the slider height */
+    }    
+    
+    .slider-text {
+        font-family: 'xkcd-script', sans-serif;
+        font-size: 0.8cm;
+        position: absolute; /* Allows independent positioning */
+        left: -80px; /* Adjust this value to move the text right */
+        top: -110px; /* Ensure no additional space above */
+        margin: 0; /* Remove margins that could affect positioning */
+    }
+    
+    .arrow {
+        font-family: 'xkcd-script', sans-serif;
+        transform: rotate(0deg); /* Rotate the arrow to point towards the left end of the slider */
+    }    
+
+    .celebrity-info {
+        margin-bottom: 20px; /* Increase space between celebrity name and images */
+    }
+    .reference-images-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+    .reference-image {
+        max-width: 19%; /* Max width of 19% of the total slider */
+        max-height: calc(19vw * 1.2); 
+        object-fit: cover;
+        aspect-ratio: 1 / 1; /* Ensures the image remains square */
+        background-color: #f0f0f0; /* Light gray background to show image boundaries */
+    }
+    .generated-images-container {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .generated-image {
+        width: 18%; /* Approximately one-fifth of the container width */
+        aspect-ratio: 1 / 1; /* Ensures the image remains square */
+        object-fit: cover;
+    }
+
+    .bibtex-box {
+        border: 2px solid #ccc;  /* Box border */
+        padding: 0px;           /* Padding inside the box */
+        background-color: #f9f9f9; /* Light background */
+        position: relative;       /* So the button can be positioned inside */
+    }
+
+    .content pre {
+        margin: 0 !important; /* margin after bibtex code box */
+    }
+    
+    #copyButton {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        font-size: 0.7em;  /* Smaller font size for the 'Copy' button */
+        padding: 5px 5px; /* Keep button size reasonable */
+    }
+
+</style>
+
+
+</head>
+<body>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Benchmarking Visually-Situated Translation of Text in Natural Images">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Benchmarking Visually-Situated Translation</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/counting_images/dice-svgrepo-com.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+
+
+<!-- Title -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h2 class="title is-2 publication-title">Benchmarking Visually-Situated Translation<br>of Text in Natural Images</h2>
+          <div class="is-size-5 publication-authors">
+            <!-- First row of authors -->
+            <span class="author-block">
+              <a href="https://esalesky.github.io">Elizabeth Salesky</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.cs.jhu.edu/~phi">Philipp Koehn</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://waypost.net">Matt Post</a><sup>2,3</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <!-- Affiliation row -->
+            <span class="author-block"><sup>1</sup>Johns Hopkins University,</span>
+            <span class="author-block"><sup>2</sup>Human Language Technology Center of Excellence,</span>
+            <span class="author-block"><sup>3</sup>Microsoft</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- Anthology PDF Link. -->
+              <span class="link-block">
+                <a href="https://aclanthology.org/2024.wmt-1.115"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- arXiv Link.
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              -->
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://huggingface.co/datasets/esalesky/vistra-benchmark"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Abstract -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          We introduce a benchmark, <span class="vistra">Vistra</span>, for visually-situated translation of English text in natural images to four target languages. We describe the dataset construction and composition. We benchmark open-source and commercial OCR and MT models on <span class="vistra">Vistra</span>, and present both quantitative results and a taxonomy of common OCR error classes with their effect on downstream MT. Finally, we assess direct image-to-text translation with a multimodal LLM, and show that it is able in some cases but not yet consistently to disambiguate possible translations with visual context. We show that this is an unsolved and challenging task even for strong commercial models. We hope that the creation and release of this benchmark which is the first of its kind for these language pairs will encourage further research in this direction.
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+
+
+<!-- Benchmark Overview -->
+<section class="architecture">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h2 class="title is-3 title-centered">Motivation</h2>
+        <div class="hero-body">
+          <img src="./static/images/exit-example-large.png" alt="Motivating example image showing contextually-dependent translations of EXIT from English to German" class="image-half-width" style="margin-top: -1cm; margin-bottom: 1.2cm;">
+          <p class="content-centered">
+            Visually-situated language concerns multimodal settings where text and vision are intermixed, and the meaning of words or phrases is directly influenced by what is observable or referenced visually. Settings where text is embedded in an image are ubiquitous, ranging from text on street signs, to chryrons on news broadcasts, language embedded in figures or social media images, or non-digitized text sources.<br><br>
+            
+            Translating visually-situated text combines a series of traditionally separate steps including text detection, optical character recognition, semantic grouping, and finally machine translation. Not only can errors propagate between steps, as generated mistakes cause mismatches in vocabulary and distribution from those observed in training and reduce downstream task performance, but processing each step in isolation separates recognized text from visual context which may be necessary to produce a correct situational translation. For example, as shown in the example above, the English word 'Exit' can be translated to German as either 'Ausfahrt' or 'Ausgang'; without appropriate context, which may not be present in the text alone, the generated translation would be a statistical guess.<br><br>
+
+            Few public benchmarks exist with images containing text and their translations, necessary to study both the impact of OCR errors on downstream MT, and also to develop and evaluate multimodals to directly translate text in images. We introduce the <span class="vistra">Vistra</span> benchmark to enable research on this task. 
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- MIMETIC2 Architecture -->
+<section class="architecture">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h2 class="title is-3 title-centered"><span class="vistra">Vistra</span> Benchmark Overview</h2>
+        <div class="hero-body">
+          <img src="./static/images/vistra-data-sample.png" alt="Vistra data sample" class="image-bigger" style="margin-top: -1cm; margin-bottom: 1.2cm;">
+          <p class="content-centered">
+            Above: a <span class="vistra">Vistra</span> data sample showing metadata, transcripts, and translations. <span class="vistra">Vistra</span> comprises 772 natural images containing English text, with aligned translations to four target languages (German, Spanish, Russian, and Mandarin Chinese) with varying levels of visual contextual dependence. Each image is annotated with its height and width, a categorical label, its semantically grouped English transcript, translations to the four target languages aligned at the level of the semantic groups in the transcript, and, word-level bounding boxes specified by corner with coordinates rescaled from 0-1, matched to the aligned word in the transcript. On average, each image contains 11.2 words and 2.4 transcript groups, for a total of 1840 parallel segments in the benchmark with an average length of 4.7 words.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Cite Us -->
+<!-- <section class="section" id="BibTeX">
+    <div class="container is-centered is-max-desktop content">
+      <h2 class="title has-text-centered ">Cite Us</h2>
+      <pre><code>@inproceedings{salesky-etal-2024-benchmarking,
+          title = "Benchmarking Visually-Situated Translation of Text in Natural Images",
+          author = "Salesky, Elizabeth  and
+          Koehn, Philipp  and
+          Post, Matt",
+          editor = "Haddow, Barry  and
+          Kocmi, Tom  and
+          Koehn, Philipp  and
+          Monz, Christof",
+          booktitle = "Proceedings of the Ninth Conference on Machine Translation",
+          month = nov,
+          year = "2024",
+          address = "Miami, Florida, USA",
+          publisher = "Association for Computational Linguistics",
+          url = "https://aclanthology.org/2024.wmt-1.115",
+          pages = "1167--1182",
+          }
+      </code></pre>
+    </div>
+  </section> -->
+
+  <!-- BibTeX Section -->
+<section class="section" id="BibTeX">
+  <div class="container is-centered is-max-desktop content">
+    <h2 class="title has-text-centered">Cite Us</h2>
+    
+    <!-- Box styling for the BibTeX -->
+    <div class="bibtex-box">
+      <pre><code id="bibtexCode">@inproceedings{salesky-etal-2024-benchmarking,
+          title = "Benchmarking Visually-Situated Translation of Text in Natural Images",
+          author = "Salesky, Elizabeth  and
+          Koehn, Philipp  and
+          Post, Matt",
+          editor = "Haddow, Barry  and
+          Kocmi, Tom  and
+          Koehn, Philipp  and
+          Monz, Christof",
+          booktitle = "Proceedings of the Ninth Conference on Machine Translation",
+          month = nov,
+          year = "2024",
+          address = "Miami, Florida, USA",
+          publisher = "Association for Computational Linguistics",
+          url = "https://aclanthology.org/2024.wmt-1.115",
+          pages = "1167--1182",
+          }
+      </code></pre>
+      
+      <!-- Copy button -->
+      <button id="copyButton" class="button is-dark">Copy</button>
+    </div>
+  </div>
+</section>
+
+<div id="copyNotification" style="display:none; position:fixed; bottom:20px; right:20px; background-color:#28a745; color:white; padding:10px; border-radius:5px; font-size:14px;">
+  BibTeX copied!
+</div>
+
+
+<script>
+  document.getElementById('copyButton').addEventListener('click', function() {
+    const bibtexText = document.getElementById('bibtexCode').innerText;
+    navigator.clipboard.writeText(bibtexText).then(function() {
+      // Show success notification
+      const notification = document.getElementById('copyNotification');
+      notification.textContent = 'BibTeX copied!';
+      notification.style.backgroundColor = '#28a745'; // Green for success
+      notification.style.display = 'block';
+
+      // Hide it after 3 seconds
+      setTimeout(function() {
+        notification.style.display = 'none';
+      }, 3000);
+    }, function() {
+      // Show failure message
+      const notification = document.getElementById('copyNotification');
+      notification.textContent = 'Failed to copy BibTeX.';
+      notification.style.backgroundColor = '#dc3545'; // Red for failure
+      notification.style.display = 'block';
+
+      // Hide it after 3 seconds
+      setTimeout(function() {
+        notification.style.display = 'none';
+      }, 3000);
+    });
+  });
+</script>
+
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+             Website source code based on the <a
+              href="https://nerfies.github.io/">Nerfies</a> project page. If you want to reuse their <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a>, please link them appropriately in your website footer.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+</body>
+</html>
